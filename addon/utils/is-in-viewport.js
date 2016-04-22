@@ -19,10 +19,15 @@ export default function isInViewport(boundingClientRect = {}, height = 0, width 
     right: rightTolerance
   } = tolerances;
 
+  const inTop = (top + topTolerance) >= 0 && (top + topTolerance) <= height || topTolerance === null;
+  const inLeft = (left + leftTolerance) >= 0 && (left + leftTolerance) <= width || leftTolerance === null;
+  const inBottom = (bottom - bottomTolerance) >= 0 && (bottom - bottomTolerance) <= height || bottomTolerance === null;
+  const inRight = (right - rightTolerance) >= 0 && (right - rightTolerance) <= width || rightTolerance === null;
+
   return (
-    (top + topTolerance)       >= 0 &&
-    (left + leftTolerance)     >= 0 &&
-    (bottom - bottomTolerance) <= height &&
-    (right - rightTolerance)   <= width
+    inTop &&
+    inLeft &&
+    inBottom &&
+    inRight
   );
 }
